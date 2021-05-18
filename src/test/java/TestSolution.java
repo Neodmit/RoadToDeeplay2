@@ -70,4 +70,24 @@ public class TestSolution {
     public void testGetResult13() throws IOException {
         assertEquals(12, Solution.getResult("STWSWTPPTPTTSWPP", "Woodman"));
     }
+
+    @Test
+    public void testGetResult14() throws IOException {
+        assertEquals(null, Solution.getResult("STWSWTPP", "Woodman"));
+    }
+
+    @Test
+    public void testGetResult15() throws IOException {
+        assertEquals(null, Solution.getResult("фывапролдйцукенг", "Woodman"));
+    }
+
+    @Test
+    public void testGetResult16() throws IOException {
+        assertEquals(null, Solution.getResult("", "Woodman"));
+    }
+
+    @Test
+    public void testGetResult17() throws IOException {
+        assertEquals(null, Solution.getResult(null, "Woodman"));
+    }
 }

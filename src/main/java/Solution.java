@@ -5,13 +5,15 @@ public class Solution {
 
     public static Integer getResult(String playingField, String race) throws IOException {
         int row = 0, col = 0;
-        boolean flag = true;
+        boolean flagNextCell = true;
         Creature creature = GettingCreatureData.gettingCreatureData(race,
                 "C:\\Users\\Dima\\RoadToDeeplay2\\src\\main\\resources\\creatures");
         Integer[][] map = ProcessingMap.processingStringToMap(playingField, creature);
 
         if (map != null) {
-            int[][] costs = new int[4][4];
+            //Реализация А* алгоритма без припятствий на любом квадратном поле(в следствии, что поле задаётся строкой)
+            //из левого верхнего в правый нижний.
+            int[][] costs = new int[map.length][map.length];
             Queue<Location> openList = new LinkedList<Location>();
             Location current = new Location(0, 0);
             Location prospective;
@@ -22,16 +24,16 @@ public class Solution {
                 while (it.hasNext()) {
                     current = it.next();
                     for (int i = 0; i < 2; i++) {
-                        if (flag) {
+                        if (flagNextCell) {
                             row = 0;
                             col++;
-                            flag = false;
+                            flagNextCell = false;
                         } else {
                             row++;
                             col = 0;
-                            flag = true;
+                            flagNextCell = true;
                         }
-                        if (current.getRow() + row <= 3 && current.getCol() + col <= 3) {
+                        if (current.getRow() + row <=map.length-1 && current.getCol() + col <= map.length-1) {
                             prospective = new Location(current.getRow() + row, current.getCol() + col);
                             cost = costs[current.getRow()][current.getCol()] + map[prospective.getRow()][prospective.getCol()];
                             if (!openList.contains(prospective) && (costs[prospective.getRow()][prospective.getCol()] > cost || costs[prospective.getRow()][prospective.getCol()] == 0)) {
@@ -45,7 +47,7 @@ public class Solution {
                     break;
                 }
             }
-            return costs[3][3];
+            return costs[map.length-1][map.length-1];
         }
         return null;
     }

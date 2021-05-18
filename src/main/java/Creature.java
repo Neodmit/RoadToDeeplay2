@@ -17,19 +17,19 @@ public class Creature {
         return race;
     }
 
-    public int getSwamp() {
+    public int getSwampMoveCost() {
         return swamp;
     }
 
-    public int getWater() {
+    public int getWaterMoveCost() {
         return water;
     }
 
-    public int getTree() {
+    public int getTreeMoveCost() {
         return tree;
     }
 
-    public int getPlain() {
+    public int getPlainMoveCost() {
         return plain;
     }
 }
